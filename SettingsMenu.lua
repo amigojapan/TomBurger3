@@ -23,44 +23,25 @@ function sendToDIfferentTrialStates()
 		composer.gotoScene( "trialPeriodStart" )
 	end
 end
-
-local function setDefaultSpeed()
-	speed = composer.getVariable( "speed" )
-	if not speed then
-		speed="1"
-	end
-	print("speed:"..speed)
-	composer.setVariable( "speed", speed )
+local function backToMainMenu()
+	composer.gotoScene( "menu" )
 end
 
-local function gotoGameEnglish()
-	setDefaultSpeed()
-	composer.setVariable( "language", "English" )
-	composer.gotoScene( "difficulty" )
-	--sendToDIfferentTrialStates()
+local function setHalfSpeed()
+	composer.setVariable( "speed", "2" )
+	composer.gotoScene( "menu" )
 end
 
-local function gotoGameJapanese()
-	setDefaultSpeed()
-	composer.setVariable( "language", "Japanese" )
-	composer.gotoScene( "difficulty" )
-	--sendToDIfferentTrialStates()
-end
-
-local function gotoGameSpanish()
-	setDefaultSpeed()
-	composer.setVariable( "language", "Spanish" )
-	composer.gotoScene( "difficulty" )
-	--sendToDIfferentTrialStates()
+local function setFullSpeed()
+	composer.setVariable( "speed", "1" )
+	composer.gotoScene( "menu" )
 end
 
 local function gotoHighScores()
 	composer.gotoScene( "scoresScreen" )
 end
 
-local function gotoSettingsMenu()
-	composer.gotoScene( "SettingsMenu" )
-end
+
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
 -- -----------------------------------------------------------------------------------
@@ -95,7 +76,7 @@ function scene:show( event )
 		ordersRectangle:setFillColor( 0, 0 , 0, 0.5 )
 		ordersRectangle:setStrokeColor( 1, 0, 0 )
 	
-		local lblTitle = display.newText( sceneGroup, "Tom Burger 3", display.contentCenterX, 50, "fonts/ume-tgc5.ttf", 75 )
+		local lblTitle = display.newText( sceneGroup, "Settings, 設定、Configuracion", display.contentCenterX, 50, "fonts/ume-tgc5.ttf", 75 )
 		lblTitle:setFillColor( 0.82, 0.86, 1 )
 		--local title = display.newImageRect( sceneGroup, "img/tom burger 3 title.png", 676, 97 )
 		--title.x = display.contentCenterX
@@ -103,33 +84,20 @@ function scene:show( event )
 	
 	
 		offsetY=500
-		translate=i18n_setlang("English")
-		local startButtonEnglish = display.newText( sceneGroup, translate["Language"], display.contentCenterX, offsetY, "fonts/ume-tgc5.ttf", 44 )
+		local startButtonEnglish = display.newText( sceneGroup, "Fast、早い, Rapido", display.contentCenterX, offsetY, "fonts/ume-tgc5.ttf", 44 )
 		startButtonEnglish:setFillColor( 0.82, 0.86, 1 )
-		startButtonEnglish:addEventListener( "tap", gotoGameEnglish )
+		startButtonEnglish:addEventListener( "tap", setFullSpeed )
 	
 		offsetY=offsetY+55
 		translate=i18n_setlang("Japanese")
-		local startButtonJapanese = display.newText( sceneGroup, translate["Language"], display.contentCenterX, offsetY, "fonts/ume-tgc5.ttf", 44 )
+		local startButtonJapanese = display.newText( sceneGroup, "Slow、遅い, Despacio", display.contentCenterX, offsetY, "fonts/ume-tgc5.ttf", 44 )
 		startButtonJapanese:setFillColor( 0.82, 0.86, 1 )
-		startButtonJapanese:addEventListener( "tap", gotoGameJapanese )
+		startButtonJapanese:addEventListener( "tap", setHalfSpeed )
 	
-		offsetY=offsetY+55
-		translate=i18n_setlang("Spanish")
-		local startButtonSpanish = display.newText( sceneGroup, translate["Language"], display.contentCenterX, offsetY, "fonts/ume-tgc5.ttf", 44 )
-		startButtonSpanish:setFillColor( 0.82, 0.86, 1 )
-		startButtonSpanish:addEventListener( "tap", gotoGameSpanish )
-
-		offsetY=offsetY+55
-		translate=i18n_setlang("Spanish")
-		local startButtonSpanish = display.newText( sceneGroup, "Settings, 設定, Opciones", display.contentCenterX, offsetY, "fonts/ume-tgc5.ttf", 44 )
-		startButtonSpanish:setFillColor( 0.82, 0.86, 1 )
-		startButtonSpanish:addEventListener( "tap", gotoSettingsMenu )
-
-		local highScoresButton = display.newText( sceneGroup, "Scores,スコアー、Puntuaje", display.contentCenterX, 720, "fonts/ume-tgc5.ttf", 44 )
+		local highScoresButton = display.newText( sceneGroup, "<<", 300, 50, "fonts/ume-tgc5.ttf", 44 )
 		highScoresButton:setFillColor( 0.75, 0.78, 1 )
 	
-		highScoresButton:addEventListener( "tap", gotoHighScores )
+		highScoresButton:addEventListener( "tap", backToMainMenu )
 	
 	end
 end
