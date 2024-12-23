@@ -1,5 +1,5 @@
 require("i18n_dict")
---require("trial")
+require("trial")
 local composer = require( "composer" )
 
 local scene = composer.newScene()
@@ -36,22 +36,22 @@ end
 local function gotoGameEnglish()
 	setDefaultSpeed()
 	composer.setVariable( "language", "English" )
-	composer.gotoScene( "difficulty" )
-	--sendToDIfferentTrialStates()
+	--composer.gotoScene( "difficulty" )
+	sendToDIfferentTrialStates()
 end
 
 local function gotoGameJapanese()
 	setDefaultSpeed()
 	composer.setVariable( "language", "Japanese" )
-	composer.gotoScene( "difficulty" )
-	--sendToDIfferentTrialStates()
+	--composer.gotoScene( "difficulty" )
+	sendToDIfferentTrialStates()
 end
 
 local function gotoGameSpanish()
 	setDefaultSpeed()
 	composer.setVariable( "language", "Spanish" )
-	composer.gotoScene( "difficulty" )
-	--sendToDIfferentTrialStates()
+	--composer.gotoScene( "difficulty" )
+	sendToDIfferentTrialStates()
 end
 
 local function gotoHighScores()

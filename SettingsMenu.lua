@@ -75,8 +75,17 @@ function scene:show( event )
 		ordersRectangle.strokeWidth = 5
 		ordersRectangle:setFillColor( 0, 0 , 0, 0.5 )
 		ordersRectangle:setStrokeColor( 1, 0, 0 )
-	
-		local lblTitle = display.newText( sceneGroup, "Settings, 設定、Configuracion", display.contentCenterX, 50, "fonts/ume-tgc5.ttf", 75 )
+
+		offsetY=150	
+		local lblTitle = display.newText( sceneGroup, "Settings", display.contentCenterX, offsetY, "fonts/ume-tgc5.ttf", 75 )
+		lblTitle:setFillColor( 0.82, 0.86, 1 )
+
+		offsetY=offsetY+75
+		local lblTitle = display.newText( sceneGroup, "設定", display.contentCenterX, offsetY, "fonts/ume-tgc5.ttf", 75 )
+		lblTitle:setFillColor( 0.82, 0.86, 1 )
+
+		offsetY=offsetY+75
+		local lblTitle = display.newText( sceneGroup, "Configuracion", display.contentCenterX, offsetY, "fonts/ume-tgc5.ttf", 75 )
 		lblTitle:setFillColor( 0.82, 0.86, 1 )
 		--local title = display.newImageRect( sceneGroup, "img/tom burger 3 title.png", 676, 97 )
 		--title.x = display.contentCenterX

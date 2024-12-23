@@ -18,11 +18,18 @@ end
 local function gotoDifficulty()
 	composer.gotoScene( "difficulty" )
 end
+
+tutorialURL=""
+local function startTutorial()
+	system.openURL(tutorialURL)
+end
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
 -- -----------------------------------------------------------------------------------
 
 -- create()
+
+title=""
 function scene:create( event )
 
 	local sceneGroup = self.view
@@ -38,16 +45,27 @@ function scene:create( event )
 	language=composer.getVariable( "language" )
 	if language=="English" then
 		story = display.newImageRect( sceneGroup, "backgrounds/storyEnglish.png", 1000,800 )
+		tutorialURL="https://youtu.be/-shnZzL7cR0?si=xAjmudJk1IV7-WKF"
+		title="Click here for tutorial"
 	elseif language=="Japanese" then
 		story = display.newImageRect( sceneGroup, "backgrounds/storyJapanese.png", 1000,800 )
+		tutorialURL="https://youtu.be/QoP9UFJDfh8?si=U1OnN697bs9E1sjq"
+		title="チュトリアル、ここをクリック"
 	elseif language=="Spanish" then
 		story = display.newImageRect( sceneGroup, "backgrounds/storySpanish.png", 1000,800 )
+		tutorialURL="https://youtu.be/XBMQxTgAv4U?si=5Tlae0Yf9qflsYl5"
+		title="Hacer click aqui para el tutorial"
 	end
 	story.x = display.contentCenterX
 	story.y = display.contentCenterY
 
 	local lblTitle = display.newText( sceneGroup, "Story", display.contentCenterX, 50, "fonts/ume-tgc5.ttf", 75 )
 	lblTitle:setFillColor( 0.82, 0.86, 1 )
+
+	local lnkTutorial = display.newText( sceneGroup, title, display.contentCenterX,100, "fonts/ume-tgc5.ttf", 50 )
+	lnkTutorial:setFillColor( 1, 1, 0 )
+	lnkTutorial:addEventListener( "tap", startTutorial )
+
 
 	local highScoresButton = display.newText( sceneGroup, "Start!", display.contentCenterX, 720, "fonts/ume-tgc5.ttf", 44 )
 	highScoresButton:setFillColor( 0.75, 0.78, 1 )

@@ -3,7 +3,12 @@ composer.recycleOnSceneChange = true -- force scene recycle
 local scene = composer.newScene()
 demo=true
 
-
+speed = composer.getVariable( "speed" )
+if speed=="1" then
+	speed=1
+else
+	speed=2
+end
 gameover=false
 --local function frameUpdate()--function runs once per frame
 --	detectColMovingObject(rat,tom)
@@ -895,7 +900,7 @@ function randomOrder()
 	sekino_orderImg.isVisible=true
 	sekino_frontImg.isVisible=false
 	
-	orderHideTimer = timer.performWithDelay( 5000, hideOrder, 0, "orderHideTimer" )
+	orderHideTimer = timer.performWithDelay( 5000*speed, hideOrder, 0, "orderHideTimer" )
 
 	if ordersRectangle.isVisible then
 		showOrders(nil)
@@ -1057,7 +1062,7 @@ function ketchupGrab(sprite)
 	if  tomImg.isVisible and sprite.dresser_table_ketchupImg.isVisible  and tom.waitingToGrabAgain==false then
 		audio.play(grabSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Grabbed Ketchup")
 		tomImg.isVisible = false
 		tomWithKetchupImg.isVisible=true
@@ -1069,7 +1074,7 @@ function wrapAndGrabBurger(sprite)
 	if tomWithRedWrapperImg.isVisible and sprite.dresser_table_burger.isVisible and tom.waitingToGrabAgain==false then
 		audio.play(grabSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Wrapped and grabbed burger")
 		tomWithRedWrapperImg.isVisible = false
 		tomWithWrappedBurgerImg.isVisible=true
@@ -1081,7 +1086,7 @@ function wrapAndGrabCheeseBurger(sprite)
 	if tomWithYellowWrapperImg.isVisible and sprite.dresser_table_cheese_burger.isVisible and tom.waitingToGrabAgain==false then
 		audio.play(grabSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Wrapped and grabbed burger")
 		tomWithYellowWrapperImg.isVisible = false
 		tomWithWrappedCheeseBurgerImg.isVisible=true
@@ -1093,7 +1098,7 @@ function mustardGrab(sprite)
 	if tomImg.isVisible and sprite.dresser_table_mustardImg.isVisible and tom.waitingToGrabAgain==false then
 		audio.play(grabSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Grabbed mustard")
 		tomImg.isVisible = false
 		tomWithMustardImg.isVisible=true
@@ -1105,7 +1110,7 @@ function ketchupRetrun(sprite)
 	if  sprite.dresser_table_emptyImg.isVisible and tomWithKetchupImg.isVisible and sprite.dresser_table_ketchupImg.isVisible==false and sprite.dresser_table_mustardImg.isVisible==false and tom.holdingBroom==false and tom.waitingToGrabAgain==false then
 		audio.play(putSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Returned Ketchup")
 		tomImg.isVisible = true
 		tomWithKetchupImg.isVisible=false
@@ -1117,7 +1122,7 @@ function mustardRetrun(sprite)
 	if  sprite.dresser_table_emptyImg.isVisible and tomWithBunsImg.isVisible==false and tomWithMustardImg.isVisible and sprite.dresser_table_mustardImg.isVisible==false and sprite.dresser_table_ketchupImg.isVisible==false and tom.holdingBroom==false and tom.waitingToGrabAgain==false then
 		audio.play(putSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Returned mustard")
 		tomImg.isVisible = true
 		tomWithMustardImg.isVisible=false
@@ -1130,7 +1135,7 @@ function toast(sprite)
 		audio.play(grabSoundEffect)
 		tom.InMotion=true
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 4000, endToasting, 0 )
+		returnTimer = timer.performWithDelay( 4000*speed, endToasting, 0 )
 		print("Toasting")
 		tomImg.isVisible = false
 		tomWaitingBunsImg.isVisible=true
@@ -1144,7 +1149,7 @@ function putBunsOnTable(sprite)
 		audio.play(putSoundEffect)
 		--fix that you can put buns where mustard adn ketchup are
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Put buns on dressing table")
 		tomImg.isVisible = true
 		tomWithBunsImg.isVisible=false
@@ -1156,7 +1161,7 @@ function putKetchupOnBuns(sprite)
 	if  sprite.dresser_table_buns.isVisible and tomWithKetchupImg.isVisible and tom.waitingToGrabAgain==false then
 		audio.play(putSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Put ketchup on buns")
 	
 		sprite.dresser_table_buns.isVisible=false
@@ -1169,7 +1174,7 @@ function putMustardOnBunsWithKetchup(sprite)
 		audio.play(putSoundEffect)
 		--fix that you can put buns where mustard adn ketchup are
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Put ketchup on buns")
 	
 		sprite.dresser_table_buns_with_ketchup.isVisible=false
@@ -1180,7 +1185,7 @@ function picklesGrabOrReturn(sprite)
 	if tomImg.isVisible and tom.waitingToGrabAgain==false then
 		audio.play(grabSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Piccle grabbed")
 		tomImg.isVisible = false
 		tomWithPicklesImg.isVisible=true
@@ -1188,7 +1193,7 @@ function picklesGrabOrReturn(sprite)
 	if tomWithPicklesImg.isVisible and tom.waitingToGrabAgain==false then
 		audio.play(putSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Pickle returned")
 		tomImg.isVisible = true
 		tomWithPicklesImg.isVisible=false
@@ -1200,7 +1205,7 @@ function putPicklesOnBuns(sprite)
 		audio.play(putSoundEffect)
 		--fix that you can put buns where mustard and ketchup are
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Put picles on buns")
 		tomImg.isVisible = true
 		tomWithPicklesImg.isVisible=false
@@ -1213,14 +1218,14 @@ function pattyGrabOrReturn(sprite)--from patty fridge
 	if tomImg.isVisible and tom.waitingToGrabAgain==false then
 		audio.play(grabSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Patty grabbed")
 		tomImg.isVisible=false
 		tomWithPattyImg.isVisible=true	end
 	if tomWithPattyImg.isVisible and tom.waitingToGrabAgain==false then
 		audio.play(putSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Patty returned")
 		tomImg.isVisible=true
 		tomWithPattyImg.isVisible=false	
@@ -1230,7 +1235,7 @@ function pattyGrabFromGriddle(sprite)
 	if tomWithSpatulaLeftImg.isVisible and (sprite.state=="cooked" or sprite.state=="burnt") and tom.waitingToGrabAgain==false then
 		tom.waitingToGrabAgain=true
 		audio.play(grabSoundEffect)
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		if sprite.pattyFlipped==false then
 			
 			print("Patty flipped")
@@ -1260,7 +1265,7 @@ function pattyPutOnDresserTable(sprite)
 	if  sprite.dresser_table_buns_with_pickles.isVisible and tomWithSpatulaCookedPattyLeftImg.isVisible and tom.waitingToGrabAgain==false then
 		audio.play(putSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Regular burger complete")
 		tomWithSpatulaLeftImg.isVisible=true
 		tomWithSpatulaCookedPattyLeftImg.isVisible=false
@@ -1272,7 +1277,7 @@ function putCheeseOnBuns(sprite)
 	if sprite.dresser_table_burger.isVisible and tomWithCheeseImg.isVisible and tom.waitingToGrabAgain==false then
 		audio.play(putSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Cheese grabbed")
 		tomImg.isVisible = true
 		tomWithCheeseImg.isVisible=false
@@ -1284,7 +1289,7 @@ function cheeseGrabOrReturn(sprite)
 	if tomImg.isVisible and tom.waitingToGrabAgain==false then
 		audio.play(grabSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Piccle grabbed")
 		tomImg.isVisible = false
 		tomWithCheeseImg.isVisible=true
@@ -1292,7 +1297,7 @@ function cheeseGrabOrReturn(sprite)
 	if tomWithCheeseImg.isVisible and tom.waitingToGrabAgain==false then
 		audio.play(putSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Pickle returned")
 		tomImg.isVisible = true
 		tomWithCheeseImg.isVisible=false
@@ -1305,7 +1310,7 @@ function putBurgerInOrdersTray(sprite)
 	if  tomWithWrappedBurgerImg.isVisible and tom.waitingToGrabAgain==false then
 		audio.play(pointsUpSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("One burger ready!")
 		tomImg.isVisible = true
 		tomWithWrappedBurgerImg.isVisible=false
@@ -1316,7 +1321,7 @@ function putCheeseBurgerInOrdersTray(sprite)
 	if  tomWithWrappedCheeseBurgerImg.isVisible and tom.waitingToGrabAgain==false then
 		audio.play(pointsUpSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("One cheese burger ready!")
 		tomImg.isVisible = true
 		tomWithWrappedCheeseBurgerImg.isVisible=false
@@ -1327,7 +1332,7 @@ function friesBagGrabOrReturn(sprite)--from fries fridge
 	if tomImg.isVisible and tom.waitingToGrabAgain==false then
 		audio.play(grabSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Fries bag grabbed")
 		tomImg.isVisible=false
 		tomWithFriesBagImg.isVisible=true
@@ -1335,7 +1340,7 @@ function friesBagGrabOrReturn(sprite)--from fries fridge
 	if tomWithFriesBagImg.isVisible and tom.waitingToGrabAgain==false then
 		audio.play(putSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Fries bag returned")
 		tomImg.isVisible=true
 		tomWithFriesBagImg.isVisible=false	
@@ -1346,7 +1351,7 @@ function friesMesure(sprite)--from fries fridge
 	if tomWithFriesBagImg.isVisible and tom.waitingToGrabAgain==false then
 		audio.play(grabSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		if fry_scale_empty.isVisible then
 			fry_scale_empty.isVisible=false
 			fry_scale_100g.isVisible=true
@@ -1370,7 +1375,7 @@ function friesCupGrabOrReturn(sprite)
 	if tomImg.isVisible and tom.waitingToGrabAgain==false then
 		tom.waitingToGrabAgain=true
 		audio.play(grabSoundEffect)
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		if fry_scale_empty.isVisible then
 			fry_scale_no_lid.isVisible=true
 			fry_scale_empty.isVisible=false
@@ -1401,7 +1406,7 @@ function friesCupGrabOrReturn(sprite)
 	if tomWithFriesMesuringCupWithFriesImg.isVisible and tom.waitingToGrabAgain==false then
 		tom.waitingToGrabAgain=true
 		audio.play(putSoundEffect)
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		if fry_scale_no_lid.isVisible then
 			if friesMesurignCupAmmount=="100G" then
 				fry_scale_no_lid.isVisible=false
@@ -1427,7 +1432,7 @@ function friesCupGrabOrReturn(sprite)
 	if tomWithFriesMesuringCupWithoughtFriesImg.isVisible and tom.waitingToGrabAgain==false then
 		tom.waitingToGrabAgain=true
 		audio.play(putSoundEffect)
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		if fry_scale_no_lid.isVisible then
 			fry_scale_no_lid.isVisible=false
 			fry_scale_empty.isVisible=true
@@ -1450,7 +1455,7 @@ function helperPutFriesInFryer(sprite)
 		fryer1_empty.isVisible=false
 		fryer1_with_fries.isVisible=true
 		fryer1_with_fries_ammount=friesMesurignCupAmmount
-		fryer1Timer=timer.performWithDelay(cookingTime, fryer1DoneEvent, 0 )
+		fryer1Timer=timer.performWithDelay(cookingTime*speed, fryer1DoneEvent, 0 )
 		timer1_state="frying"
 		print("Fryer 1 frying")
 		timer1_off.isVisible=false
@@ -1462,7 +1467,7 @@ function helperPutFriesInFryer(sprite)
 		fryer2_empty.isVisible=false
 		fryer2_with_fries.isVisible=true
 		fryer2_with_fries_ammount=friesMesurignCupAmmount
-		fryer2Timer=timer.performWithDelay(cookingTime, fryer2DoneEvent, 0 )
+		fryer2Timer=timer.performWithDelay(cookingTime*speed, fryer2DoneEvent, 0 )
 		timer2_state="frying"
 		print("Fryer 2 frying")
 		timer2_off.isVisible=false
@@ -1474,7 +1479,7 @@ end
 function friesPutInFryer(sprite)
 	if tomWithFriesMesuringCupWithFriesImg.isVisible and tom.waitingToGrabAgain==false then
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		if friesMesurignCupAmmount=="100G" then
 			helperPutFriesInFryer(sprite)
 			print("Put 100g fries in fryer")					
@@ -1509,7 +1514,7 @@ function friesTakeAndPutBackFromFryer(sprite)
 	if tomImg.isVisible and tom.waitingToGrabAgain==false then
 		tom.waitingToGrabAgain=true
 		audio.play(grabSoundEffect)
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		if sprite==fryer1_no_tray and timer1_state=="done" and fryer1_with_fries.isVisible then
 			fryer1_no_tray.isVisible=true
 			fryer1_empty.isVisible=false
@@ -1622,7 +1627,7 @@ function spatulaGrabOrReturn(sprite)
 	if tomImg.isVisible and tom.waitingToGrabAgain==false then
 		audio.play(grabSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Spatula grabbed")
 		tomImg.isVisible=false
 		tomWithSpatulaLeftImg.isVisible=true
@@ -1631,7 +1636,7 @@ function spatulaGrabOrReturn(sprite)
 	elseif tomWithSpatulaLeftImg.isVisible and tom.waitingToGrabAgain==false then
 		audio.play(putSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Spatula returned")
 		tomImg.isVisible=true
 		tomWithSpatulaLeftImg.isVisible=false
@@ -1643,14 +1648,14 @@ function redWrapperGrabOrReturn(sprite)
 	if tomImg.isVisible and tom.waitingToGrabAgain==false then
 		audio.play(grabSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Spatula grabbed")
 		tomImg.isVisible=false
 		tomWithRedWrapperImg.isVisible=true
 	elseif tomWithRedWrapperImg.isVisible and tom.waitingToGrabAgain==false then
 		audio.play(putSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Spatula returned")
 		tomImg.isVisible=true
 		tomWithRedWrapperImg.isVisible=false
@@ -1660,14 +1665,14 @@ function yellowWrapperGrabOrReturn(sprite)
 	if tomImg.isVisible and tom.waitingToGrabAgain==false then
 		audio.play(grabSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Yellow wrapper grabbed")
 		tomImg.isVisible=false
 		tomWithYellowWrapperImg.isVisible=true
 	elseif tomWithYellowWrapperImg.isVisible and tom.waitingToGrabAgain==false then
 		audio.play(putSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Yellow wrapper returned")
 		tomImg.isVisible=true
 		tomWithYellowWrapperImg.isVisible=false
@@ -1683,7 +1688,7 @@ function putPattyOnGriddle(sprite)
 		audio.play(cookingSoundEffect)
 		--(fixed I think)fix that you can put buns where mustard ann ketchup are
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Put patty on griddle")
 		--tomImg.isVisible = true
 		--tomWithPattyImg.isVisible=false
@@ -1691,16 +1696,16 @@ function putPattyOnGriddle(sprite)
 		sprite.griddle_slot_raw_frame1Img.isVisible=true
 		sprite.state="raw"
 		if sprite==griddle_slot1 then
-			cookedTimer1=timer.performWithDelay(cookingTime, cookedEvent1, 0 )
+			cookedTimer1=timer.performWithDelay(cookingTime*speed, cookedEvent1, 0 )
 		end
 		if sprite==griddle_slot2 then
-			cookedTimer2=timer.performWithDelay(cookingTime, cookedEvent2, 0 )
+			cookedTimer2=timer.performWithDelay(cookingTime*speed, cookedEvent2, 0 )
 		end
 		if sprite==griddle_slot3 then
-			cookedTimer3=timer.performWithDelay(cookingTime, cookedEvent3, 0 )
+			cookedTimer3=timer.performWithDelay(cookingTime*speed, cookedEvent3, 0 )
 		end
 		if sprite==griddle_slot4 then
-			cookedTimer4=timer.performWithDelay(cookingTime, cookedEvent4, 0 )
+			cookedTimer4=timer.performWithDelay(cookingTime*speed, cookedEvent4, 0 )
 		end
 	end
 end
@@ -1738,7 +1743,7 @@ function putFriesInFriesBox(sprite)
 	if tomWithFriesBasketFullImg.isVisible and tom.waitingToGrabAgain==false then
 		audio.play(pointsUpSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		print("Spatula grabbed")
 		tomWithFriesBasketFullImg.isVisible=false
 		tomWithFriesBasketEmptyImg.isVisible=true
@@ -1808,7 +1813,7 @@ local function handleKitchenCollision(sprite)
 	if sprite.myName ==  "trash_can" and tom.waitingToGrabAgain==false then
 		--audio.play(pointsUpSoundEffect)
 		tom.waitingToGrabAgain=true
-		returnTimer = timer.performWithDelay( 500, grabTimerEnd, 0 )
+		returnTimer = timer.performWithDelay( 500*speed, grabTimerEnd, 0 )
 		if tomWithSpatulaCookedPattyLeftImg.isVisible then
 			print("tom drops cooked patty in garbage")
 			audio.play(putSoundEffect)
@@ -2316,7 +2321,7 @@ function myLeftTouchListener( event )
 		end
 		moveTomLeft()
 		currentButton=myLeftButton
-		fireTimer = timer.performWithDelay( timeForMoveInMilliseconds+100, moveTomLeft, 0 )
+		fireTimer = timer.performWithDelay( (timeForMoveInMilliseconds+100)*speed, moveTomLeft, 0 )
         print( "object touched = " .. tostring(event.target) )  -- "event.target" is the touched object
 	elseif ( event.phase == "moved" ) then
 		--if isWithinBounds(myLeftButton, event) == false then
@@ -2348,7 +2353,7 @@ function myRightTouchListener( event )
 		end
 		moveTomRight()
 		currentButton=myRightButton
-		fireTimer = timer.performWithDelay( timeForMoveInMilliseconds+100, moveTomRight, 0 )
+		fireTimer = timer.performWithDelay( (timeForMoveInMilliseconds+100)*speed, moveTomRight, 0 )
         print( "object touched = " .. tostring(event.target) )  -- "event.target" is the touched object
 	elseif ( event.phase == "moved" ) then
 		if isWithinBounds(myRightButton, event) == false then
@@ -2378,7 +2383,7 @@ local function myUpTouchListener( event )
 		end
 		moveTomUp()
 		currentButton=myUpButton
-		fireTimer = timer.performWithDelay( timeForMoveInMilliseconds+100, moveTomUp, 0 )
+		fireTimer = timer.performWithDelay( (timeForMoveInMilliseconds+100)*speed, moveTomUp, 0 )
         print( "object touched = " .. tostring(event.target) )  -- "event.target" is the touched object
 	elseif ( event.phase == "moved" ) then
 		if isWithinBounds(myUpButton, event) == false then
@@ -2408,7 +2413,7 @@ local function myDownTouchListener( event )
 		end
 		moveTomDown()
 		currentButton=myDownButton
-		fireTimer = timer.performWithDelay( timeForMoveInMilliseconds+100, moveTomDown, 0 )
+		fireTimer = timer.performWithDelay( (timeForMoveInMilliseconds+100)*speed, moveTomDown, 0 )
         print( "object touched = " .. tostring(event.target) )  -- "event.target" is the touched object
 	elseif ( event.phase == "moved" ) then
 		if isWithinBounds(myDownButton, event) == false then
@@ -2450,7 +2455,7 @@ function gameloop()
 	end
 end
 
-fireRatTimer = timer.performWithDelay( timeForMoveInMilliseconds+100, gameloop, 0, "fireRatTimer" )
+fireRatTimer = timer.performWithDelay( (timeForMoveInMilliseconds+100)*speed, gameloop, 0, "fireRatTimer" )
 
 local orderTimer
 function oirderTimeSet()
@@ -2474,7 +2479,7 @@ function oirderTimeSet()
 		timer.cancel(orderTimer)
 	end
 	--do later, randomize order timming for each order
-	orderTimer = timer.performWithDelay( orderWaitTime, randomOrder, 0 )
+	orderTimer = timer.performWithDelay( orderWaitTime*speed, randomOrder, 0 )
 	print("Waiting " .. orderWaitTime .."for next orders to come in")
 end
 oirderTimeSet()
@@ -2578,7 +2583,7 @@ function oneHourOver()
 	labelTimeLeft.text = translate["Nokori"] .. tostring(hours) .. translate["Punkan"]
 	print(hours .. "H left")
 end
-hourTimer = timer.performWithDelay( millisecondsPerHour, oneHourOver, 0 ,"hourTimer") --one minute per hour
+hourTimer = timer.performWithDelay( millisecondsPerHour*speed, oneHourOver, 0 ,"hourTimer") --one minute per hour
 print("Waiting " .. orderWaitTime .."for next orders to come in")
 
 
@@ -2604,9 +2609,9 @@ function poop()
 	table.insert(poops, newPoop)
 end
 if difficulty==1 then
-	poopTimer = timer.performWithDelay( 100000, poop, 0, "poopTimer" )	
+	poopTimer = timer.performWithDelay( 100000*speed, poop, 0, "poopTimer" )	
 else
-	poopTimer = timer.performWithDelay( 50000, poop, 0, "poopTimer" )
+	poopTimer = timer.performWithDelay( 50000*speed, poop, 0, "poopTimer" )
 end
 
 local animationLoopTimer
@@ -2702,7 +2707,7 @@ function animationLoop()
 		end
 	end
 end
-animationLoopTimer = timer.performWithDelay( 200, animationLoop, 0, "animationLoopTimer" )
+animationLoopTimer = timer.performWithDelay( 200*speed, animationLoop, 0, "animationLoopTimer" )
 
 
 audio.reserveChannels( 1 )
